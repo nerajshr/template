@@ -24,6 +24,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 const App: () => React$Node = () => {
   return (
     <>
@@ -44,6 +46,9 @@ const App: () => React$Node = () => {
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.js</Text> to change this
                 screen and then come back to see your edits.
+                <Text>
+                  Lorem <Icon name="md-settings" color="#4F8EF7" /> Ipsum
+                </Text>
               </Text>
             </View>
             <View style={styles.sectionContainer}>
