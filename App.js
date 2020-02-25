@@ -1,106 +1,36 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
-// import { Button } from 'native-base';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import {createBottomTabNavigator} from 'react-navigation-tabs';
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
-class HomeScreen extends React.Component {
-    static navigationOptions = {
-      title: ' Connection ',
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }
-
-    render() {
-      return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Home Screen</Text>
-          <Button
-            title="Detail"
-            onPress={() => this.props.navigation.navigate('Detail', {
-              paramName: [1, 3, 3, 4],
-            })}
-          />
-
-        </View>
-      );
-    }
-}
-
-function DetailScreen(props) {
+function HomeScreen({ navigation }) {
   return (
-    <View>
-      <Text> Detail Screen </Text>
-      <Text>
-        {' '}
-        {JSON.stringify(props)}
-        {' '}
-      </Text>
-      <Text>
-        {' '}
-        {JSON.stringify(props.navigation.getParam('paramName', null))}
-      </Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        title="change"
-        onPress={() => props.navigation.goBack()}
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
       />
-      <Button title="update Header" onPress={() => props.navigation.setParams({ paramName: 'Hello' })} />
     </View>
   );
 }
 
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
 
-// DetailScreen.navigationOptions = ({ navigation }) => ({
-//   title: JSON.stringify(navigation.getParam('paramName')),
-// });
-//
-//
-// const AppNavigator = createStackNavigator({
-//   Home: {
-//     screen: HomeScreen,
-//   },
-//   Detail: {
-//     screen: DetailScreen,
-//   },
-//
-// },
-// {
-//   intialRouteName: 'Detail',
-//   defaultNavigationOptions: {
-//   navigationOptions :{
-//       tabBarLabel : 'Home!',
-//   },
-//   }
-// });
-const ExampleScreen = View;
+const Drawer = createDrawerNavigator();
 
-const Home = createStackNavigator(
-  {
-    Feed: ExampleScreen,
-    Profile: ExampleScreen,
-  },
-  {
-    defaultNavigationOptions: {
-      title: 'Home',
-      headerTintColor: '#fff',
-      headerStyle: {
-        backgroundColor: '#000',
-      },
-    },
-    navigationOptions: {
-      tabBarLabel: 'Home!',
-    },
-  }
-);
-
-const Tabs = createBottomTabNavigator({ Home });
-export default createAppContainer(Tabs);
-
-
-// export default createAppContainer(AppNavigator);
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
