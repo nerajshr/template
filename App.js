@@ -6,25 +6,14 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
+import ChatContainer from './Components/Chat/ChatContainer';
+
+
 const Stack = createStackNavigator();
 
-function Profile() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
 
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications!</Text>
-    </View>
-  );
-}
-
-function FriendZone() {
+function Friend() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Notifications!</Text>
@@ -33,7 +22,7 @@ function FriendZone() {
 }
 
 
-function Catalog() {
+function Aquitance() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Notifications!</Text>
@@ -41,50 +30,23 @@ function Catalog() {
   );
 }
 
-function MessageListScreen({navigation}) {
-  return (
-      <View>
-    {/*<Text>{JSON.stringify(navigation)}</Text>*/}
-    {/*      <Button title='nextpage' onPress={navigation.navigate('MessageDetailScreen')} />*/}
 
-    <View >
-        <Icon name="whmcs" size={25} color="#00acee" style={{ paddingRight: 10 }} />
-    </View>
-      </View>
-  );
-}
-
-function MessageDetailScreen() {
-  return (
-    <Text>Detail</Text>
-  );
-}
-
-function MessageStack() {
+function SearchScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Message"
-        component={MessageListScreen}
+        name="Connections"
+        component={() => (<View />)}
         options={{
-          headerTitle: "Messages",
-          headerLeft: () => (
-            <Icon name="user" size={25} color="#00acee" style={{ paddingLeft: 10 }} />
+          headerRight:  () => (
+              <Icon
+                name="search"
+                size={Platform.OS === 'ios' ? 22 : 25}
+              />
           ),
-          headerRight: () => (
-            <Icon name="whmcs" size={25} color="#00acee" style={{ paddingRight: 10 }} />
-          ),
-          // headerStyle: {
-          //   backgroundColor: '#f4511e',
-          // },
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontWeight: 'Sans-serif',
-            fontSize: 20,
-          }
+
         }}
       />
-      <Stack.Screen name="MessageDetailScreen" component={MessageDetailScreen} />
     </Stack.Navigator>
   );
 }
@@ -92,11 +54,11 @@ function MessageStack() {
 
 const TopTab = createMaterialTopTabNavigator();
 
-function MyTopTab() {
+function MyTopNotificationTab() {
   return (
     <TopTab.Navigator>
-      <TopTab.Screen name="Catalog" component={Catalog} />
-      <TopTab.Screen name="FriendZone" component={FriendZone} />
+      <TopTab.Screen name="Aquitances" component={Aquitance} />
+      <TopTab.Screen name="Friends" component={Friend} />
     </TopTab.Navigator>
   );
 }
@@ -107,7 +69,7 @@ function MyStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="Connection"
-        component={MyTopTab}
+        component={() => (<View />)}
         options={{
           headerTitle: "Connections",
           headerLeft: () => (
@@ -136,7 +98,7 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      initialRouteName="Home"
       tabBarOptions={{
         activeTintColor: '#00acee',
       }}
@@ -152,8 +114,8 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Notifications"
-        component={Notifications}
+        name="Search"
+        component={SearchScreen}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
@@ -162,8 +124,8 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={Profile}
+        name="Thread"
+        component={SearchScreen}
         options={{
           tabBarLabel: 'Thread',
           tabBarIcon: ({ color, size }) => (
@@ -172,8 +134,19 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Chat"
-        component={MessageStack}
+        name="Notification"
+        component={MyTopNotificationTab}
+        options={{
+          tabBarLabel: 'Notification',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="envelope" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Messages"
+        component={ChatContainer}
         options={{
           tabBarLabel: 'Messages',
           tabBarIcon: ({ color, size }) => (
