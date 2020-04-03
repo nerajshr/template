@@ -3,8 +3,8 @@ import {
 } from 'react-native';
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import DetailChatScreen from './DetailChatScreen';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import DetailChatScreen from './DetailChatScreen';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +33,7 @@ export default function AllChatScreen({ navigation }) {
           <View style={{ flex: 1, height: 50 }}>
             <Text onPress={() => navigation.navigate('detailScreen')}>@nerajshr</Text>
             <Text>
-                Chat, Profile and Catalog , make first the twiiter, with backend
+              Chat, Profile and Catalog , make first the twiiter, with backend
               {JSON.stringify(navigation)}
               {' '}
               ...
@@ -49,13 +49,13 @@ export default function AllChatScreen({ navigation }) {
         backgroundColor: 'skyblue',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute', //Here is the trick
-        bottom: 0, //Here is the trick
-        right:0,
-        borderRadius:100,
+        position: 'absolute', // Here is the trick
+        bottom: 0, // Here is the trick
+        right: 0,
+        borderRadius: 100,
       }}
       >
-        <Icon name='home' size={35} />
+        <Icon name="home" size={35} />
       </View>
     </ScrollView>
   );

@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Axios from 'axios';
+import HomeComponent from './Components/Home/HomeComponent';
 
 import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 import ChatContainer from './Components/Chat/ChatContainer';
@@ -12,11 +14,18 @@ import ChatContainer from './Components/Chat/ChatContainer';
 
 const Stack = createStackNavigator();
 
+function AxiosGetRequest(){
+    Axios.get('http://ip.jsontest.com/').then((response) => {
+        alert(JSON.stringify(response));
+    })
+}
 
 function Friend() {
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Notifications!</Text>
+        <Button title='clickme' onPress={AxiosGetRequest} />
     </View>
   );
 }
@@ -69,7 +78,7 @@ function MyStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="Connection"
-        component={() => (<View />)}
+        component={HomeComponent}
         options={{
           headerTitle: "Connections",
           headerLeft: () => (
@@ -78,12 +87,8 @@ function MyStack() {
           headerRight: () => (
             <Icon name="whmcs" size={25} color="#00acee" style={{ paddingRight: 10 }} />
           ),
-          // headerStyle: {
-          //   backgroundColor: '#f4511e',
-          // },
           headerTintColor: 'black',
           headerTitleStyle: {
-            fontWeight: 'Sans-serif',
             fontSize: 24,
           }
         }}
