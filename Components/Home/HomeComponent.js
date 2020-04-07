@@ -1,19 +1,57 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
-import Axios from 'axios';
+import React, { Fragment, Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  Button,
+  Text
+} from 'react-native';
 
-function HomeComponent() {
-  const ApiGetCall = () => {
-    Axios.get('http://ip.jsontest.com/').then((respone) => {
-      console.log(JSON.stringify(respone));
-    });
-  };
-  return (
-    <View>
-      <Text> Global Space here </Text>
-      <Button title="ApiTest" onPress={ApiGetCall} />
-    </View>
-  );
+
+class App extends Component {
+    state = { count: 0 };
+
+    decrementCount() {
+      let { count } = this.state;
+      if (count > 0) {
+        count--;
+      }
+      this.setState({
+        count
+      });
+    }
+
+    incrementCount() {
+      let { count } = this.state;
+      count++;
+      this.setState({
+        count
+      });
+    }
+
+    render() {
+      const { count } = this.state;
+      return (
+        <View styles={styles.container}>
+          <Button
+            title="increment"
+            onPress={() => this.incrementCount()}
+          />
+          <Text>{count}</Text>
+          <Button
+            title="decrement"
+            onPress={() => this.decrementCount()}
+          />
+        </View>
+      );
+    }
 }
 
-export default HomeComponent;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
+
+export default App;
