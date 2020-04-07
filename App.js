@@ -3,100 +3,8 @@ import { Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Axios from 'axios';
-import HomeComponent from './Components/Home/HomeComponent';
 
-import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
-import ChatContainer from './Components/Chat/ChatContainer';
-
-
-const Stack = createStackNavigator();
-
-function AxiosGetRequest(){
-    Axios.get('http://ip.jsontest.com/').then((response) => {
-        alert(JSON.stringify(response));
-    })
-}
-
-function Friend() {
-
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications!</Text>
-        <Button title='clickme' onPress={AxiosGetRequest} />
-    </View>
-  );
-}
-
-
-function Aquitance() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications!</Text>
-    </View>
-  );
-}
-
-
-function SearchScreen() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Connections"
-        component={() => (<View />)}
-        options={{
-          headerRight:  () => (
-              <Icon
-                name="search"
-                size={Platform.OS === 'ios' ? 22 : 25}
-              />
-          ),
-
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
-
-const TopTab = createMaterialTopTabNavigator();
-
-function MyTopNotificationTab() {
-  return (
-    <TopTab.Navigator>
-      <TopTab.Screen name="Aquitances" component={Aquitance} />
-      <TopTab.Screen name="Friends" component={Friend} />
-    </TopTab.Navigator>
-  );
-}
-
-
-function MyStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Connection"
-        component={HomeComponent}
-        options={{
-          headerTitle: "Connections",
-          headerLeft: () => (
-            <Icon name="user" size={25} color="#00acee" style={{ paddingLeft: 10 }} />
-          ),
-          headerRight: () => (
-            <Icon name="whmcs" size={25} color="#00acee" style={{ paddingRight: 10 }} />
-          ),
-          headerTintColor: 'black',
-          headerTitleStyle: {
-            fontSize: 24,
-          }
-        }}
-      />
-    </Stack.Navigator>
-  );
-}
-
+import MainScreen from './Components/HomePage/MainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -105,12 +13,13 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: '#00acee',
+        activeTintColor: '#3AA760',
+        showLabel: false // to show text at tab bottom
       }}
     >
       <Tab.Screen
         name="Home"
-        component={MyStack}
+        component={() => <MainScreen />}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
@@ -120,7 +29,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen}
+        component={() => <View />}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
@@ -128,19 +37,10 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Thread"
-        component={SearchScreen}
-        options={{
-          tabBarLabel: 'Thread',
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="fire-alt" color={color} size={size} />
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="Notification"
-        component={MyTopNotificationTab}
+        component={() => <View />}
         options={{
           tabBarLabel: 'Notification',
           tabBarIcon: ({ color, size }) => (
@@ -151,7 +51,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Messages"
-        component={ChatContainer}
+        component={() => <View />}
         options={{
           tabBarLabel: 'Messages',
           tabBarIcon: ({ color, size }) => (
@@ -163,6 +63,7 @@ function MyTabs() {
   );
 }
 
+console.disableYellowBox = true;
 export default function App() {
   return (
     <NavigationContainer>
