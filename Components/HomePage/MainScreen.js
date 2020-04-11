@@ -3,11 +3,11 @@ import {
   View, Text, Image, Button, ScrollView, TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon2 from 'react-native-vector-icons/AntDesign';
 import {
   createDrawerNavigator, DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,20 +16,20 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <View>
-      <Image
-        style={{
-          marginTop: 5,
-          marginBottom: 5,
-          marginLeft: 15,
-          width: 75,
-          height: 75,
-          borderRadius: 100,
-        }}
-        source={require('../../assests/c.jpeg')}
-      />
-      <Text> @ping</Text>
+        <Image
+          style={{
+            marginTop: 5,
+            marginBottom: 5,
+            marginLeft: 15,
+            width: 75,
+            height: 75,
+            borderRadius: 100,
+          }}
+          source={require('../../assests/c.jpeg')}
+        />
+        <Text> @ping</Text>
       </View>
-        <DrawerItem label="Help" onPress={() => props.navigation.navigate('meow')} />
+      <DrawerItem label="Help" onPress={() => props.navigation.navigate('meow')} />
     </DrawerContentScrollView>
   );
 }
@@ -57,7 +57,7 @@ function MainScreen({ navigation }) {
         </View>
         {/* <Text style={{ color: '#3AA760', fontSize: 30, fontWeight:'bold' }}>  Connection</Text> */}
         <View>
-          <Icon.Button name="affiliatetheme" backgroundColor="white" color="#3AA760" size={30} />
+          <Icon2.Button name="twitter" backgroundColor="white" color="#3AA760" size={30} />
         </View>
 
         <View>
@@ -67,8 +67,8 @@ function MainScreen({ navigation }) {
                 marginTop: 5,
                 marginBottom: 5,
                 marginRight: 5,
-                width: 45,
-                height: 45,
+                width: 35,
+                height: 35,
                 borderRadius: 100,
               }}
               source={require('../../assests/c.jpeg')}
@@ -76,7 +76,9 @@ function MainScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{ flex: 10 }} />
+      <ScrollView style={{ flex: 10 }}>
+        <Text> Content Goes Here </Text>
+      </ScrollView>
     </ScrollView>
 
   );
