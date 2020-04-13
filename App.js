@@ -9,6 +9,8 @@ import Icon3 from 'react-native-vector-icons/Fontisto';
 import MainScreen from './Components/HomePage/MainScreen';
 import MessageScreen from './Components/Message/MessageScreen';
 import Example from './Components/Search/SearchScreen';
+import NotificationExample from './Components/Notification/NotificationScreen';
+
 const Tab = createBottomTabNavigator();
 
 function IconWithBadge({
@@ -58,7 +60,7 @@ function MyTabs() {
     >
       <Tab.Screen
         name="Home"
-        component={() => <MainScreen />}
+        component={MainScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
@@ -68,7 +70,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Search"
-        component={() => <Example />}
+        component={Example}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (
@@ -79,7 +81,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Notification"
-        component={() => <View />}
+        component={NotificationExample}
         options={{
           tabBarLabel: 'Notification',
           tabBarIcon: ({ color, size }) => (
@@ -90,7 +92,7 @@ function MyTabs() {
 
       <Tab.Screen
         name="Messages"
-        component={() => <MessageScreen />}
+        component={MessageScreen}
         options={{
           tabBarLabel: 'Messages',
           tabBarIcon: ({ color, size }) => (

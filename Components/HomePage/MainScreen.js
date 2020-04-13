@@ -8,6 +8,7 @@ import {
   createDrawerNavigator, DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
+import ImagePicker from 'react-native-image-picker';
 
 const Drawer = createDrawerNavigator();
 
@@ -44,6 +45,15 @@ const DrawerScreen = () => (
   </Drawer.Navigator>
 );
 
+const options = {
+  title: 'Select Avatar',
+  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
+
 
 function MainScreen({ navigation }) {
   return (
@@ -53,9 +63,31 @@ function MainScreen({ navigation }) {
       }}
       >
         <View>
-          <Icon.Button name="camera" backgroundColor="white" color="#3AA760" size={30} />
+          <Icon.Button
+            name="camera"
+            backgroundColor="white"
+            color="#3AA760"
+            size={30}
+            onPress={() => ImagePicker.showImagePicker(options, (response) => {
+              console.log('Response = ', response);
+
+              if (response.didCancel) {
+                console.log('User cancelled image picker');
+              } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+              } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+              } else {
+                const source = { uri: response.uri };
+                // You can also display the image using data:
+                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+                this.setState({
+                  avatarSource: source,
+                });
+              }
+            })}
+          />
         </View>
-        {/* <Text style={{ color: '#3AA760', fontSize: 30, fontWeight:'bold' }}>  Connection</Text> */}
         <View>
           <Icon2.Button name="twitter" backgroundColor="white" color="#3AA760" size={30} />
         </View>
