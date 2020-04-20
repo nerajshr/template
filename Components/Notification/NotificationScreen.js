@@ -1,6 +1,9 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
+import YouTube from 'react-native-youtube';
 import { GiftedChat } from 'react-native-gifted-chat';
+import ReactNativeYouTubeExample from './YoutubeExample';
+
 
 class NotificationExample extends React.Component {
     state = {
@@ -32,13 +35,20 @@ class NotificationExample extends React.Component {
 
     render() {
       return (
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={(messages) => this.onSend(messages)}
-          user={{
-            _id: 1,
-          }}
-        />
+        <View style={{flex: 1}}>
+
+          <ReactNativeYouTubeExample/>
+          <View style={{flex: 4}}>
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={(messages) => this.onSend(messages)}
+            user={{
+              _id: 1,
+            }}
+          />
+          </View>
+        </View>
+
       );
     }
 }

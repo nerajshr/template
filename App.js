@@ -11,6 +11,7 @@ import MessageScreen from './Components/Message/MessageScreen';
 import Example from './Components/Search/SearchScreen';
 import NotificationExample from './Components/Notification/NotificationScreen';
 
+import CameraScreen from './Components/Camera/RNCameraExample';
 const Tab = createBottomTabNavigator();
 
 function IconWithBadge({
@@ -54,7 +55,7 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       tabBarOptions={{
-        activeTintColor: '#3AA760',
+        activeTintColor: 'C',
         showLabel: false // to show text at tab bottom
       }}
     >
@@ -70,7 +71,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Search"
-        component={Example}
+        component={CameraScreen}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color, size }) => (

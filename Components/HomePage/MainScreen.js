@@ -8,7 +8,10 @@ import {
   createDrawerNavigator, DrawerContentScrollView,
   DrawerItem,
 } from '@react-navigation/drawer';
-import ImagePicker from 'react-native-image-picker';
+import PostUIScreen from '../PostUIComponent/PostUIScreen';
+import Colors from '../../utils/constants/Colors';
+import Icon3 from 'react-native-vector-icons/Ionicons';
+
 
 const Drawer = createDrawerNavigator();
 
@@ -17,20 +20,36 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <View>
+          <View style={{ flex:1, justifyContent:'center', marginLeft:40}}>
         <Image
           style={{
             marginTop: 5,
             marginBottom: 5,
-            marginLeft: 15,
-            width: 75,
-            height: 75,
+            width: 100,
+            height: 100,
             borderRadius: 100,
           }}
           source={require('../../assests/c.jpeg')}
         />
-        <Text> @ping</Text>
+        <Text style={{ fontSize: 15, paddingTop:2, fontWeight:'bold' }}> Neeraj Sharma</Text>
+          <Text style={{ color:Colors.darkGrey }}>@nerajshr</Text>
+          </View>
+          <View>
+              <View style={{ flex:1, flexDirection: 'row', justifyContent: 'flex-start'}}>
+                  <Icon3.Button name="ios-person" size={25} color={Colors.appColor} backgroundColor={Colors.white} />
+                  <Text style={{ fontSize: 15, paddingTop: 8 }}>View Profile </Text>
+              </View>
+              <View style={{ flex:1, flexDirection: 'row', justifyContent: 'flex-start'}}>
+                  <Icon3.Button name="ios-school" size={25} color={Colors.appColor} backgroundColor={Colors.white} />
+                  <Text style={{ fontSize: 15, paddingTop: 8 }}> /Aiactr </Text>
+              </View>
+              <View style={{ flex:1, flexDirection: 'row', justifyContent: 'flex-start'}}>
+                  <Icon3.Button name="ios-settings" size={25} color={Colors.appColor} backgroundColor={Colors.white} />
+                  <Text style={{ fontSize: 15, paddingTop: 8 }}> Settings </Text>
+              </View>
+          </View>
       </View>
-      <DrawerItem label="Help" onPress={() => props.navigation.navigate('meow')} />
+      <DrawerItem label="Contact Us" onPress={() => props.navigation.navigate('meow')} />
     </DrawerContentScrollView>
   );
 }
@@ -45,21 +64,12 @@ const DrawerScreen = () => (
   </Drawer.Navigator>
 );
 
-const options = {
-  title: 'Select Avatar',
-  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images',
-  },
-};
-
 
 function MainScreen({ navigation }) {
   return (
     <ScrollView style={{ flex: 1 }}>
       <View style={{
-        flex: 1, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: "white"
+        flex: 1, flexDirection: 'row', justifyContent: 'space-between', backgroundColor: Colors.white
       }}
       >
         <View>
@@ -68,24 +78,24 @@ function MainScreen({ navigation }) {
             backgroundColor="white"
             color="#3AA760"
             size={30}
-            onPress={() => ImagePicker.showImagePicker(options, (response) => {
-              console.log('Response = ', response);
-
-              if (response.didCancel) {
-                console.log('User cancelled image picker');
-              } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-              } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-              } else {
-                const source = { uri: response.uri };
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-                this.setState({
-                  avatarSource: source,
-                });
-              }
-            })}
+            // onPress={() => ImagePicker.showImagePicker(options, (response) => {
+            //   console.log('Response = ', response);
+            //
+            //   if (response.didCancel) {
+            //     console.log('User cancelled image picker');
+            //   } else if (response.error) {
+            //     console.log('ImagePicker Error: ', response.error);
+            //   } else if (response.customButton) {
+            //     console.log('User tapped custom button: ', response.customButton);
+            //   } else {
+            //     const source = { uri: response.uri };
+            //     // You can also display the image using data:
+            //     // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+            //     this.setState({
+            //       avatarSource: source,
+            //     });
+            //   }
+            // })}
           />
         </View>
         <View>
@@ -109,7 +119,7 @@ function MainScreen({ navigation }) {
         </View>
       </View>
       <ScrollView style={{ flex: 10 }}>
-        <Text> Content Goes Here </Text>
+        <PostUIScreen/>
       </ScrollView>
     </ScrollView>
 
